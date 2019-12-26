@@ -27,6 +27,13 @@
 
 (menu-bar-mode 0)
 
+;; etags
+(defun create-tags (dir-name)
+   "Create tags file."
+   (interactive "DDirectory: ")
+   (eshell-command 
+   (format "find %s -type f -name \"*.[ch]\" | etags -" dir-name)))
+
 ;; helm config
 (require 'helm)
 (require 'helm-config)
@@ -166,6 +173,11 @@
 ;; Flow
 (load-file "~/.emacs.d/flow-for-emacs/flow.el")
 (add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
+
+;; Clojure stuff
+(defun cljs-node-repl ()
+  (interactive)
+  (inf-clojure "lein trampoline run -m clojure.main repl.clj"))
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
